@@ -1,0 +1,158 @@
+package BasePage;
+
+import HomePage.HomePage;
+import Pages.AlertsFramesWindows.Alerts;
+import Pages.AlertsFramesWindows.BrowserWindows;
+import Pages.AlertsFramesWindows.Frames;
+import Pages.AlertsFramesWindows.ModalDialogs;
+import Pages.BookStoreApplication.BookStore;
+import Pages.BookStoreApplication.LogIn;
+import Pages.BookStoreApplication.Profile;
+import Pages.Elements.*;
+import Pages.Forms.PracticeForm;
+import Pages.Interactions.*;
+import Pages.Widgets.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+
+import java.io.File;
+import java.time.Duration;
+import java.util.ArrayList;
+
+public class BasePage {
+
+    public WebDriverManager wdm;
+    public WebDriver driver;
+    public WebDriverWait wdwait;
+    public Actions actions;
+    public HomePage homePage;
+    public Alerts alerts;
+    public BrowserWindows browserWindows;
+    public Frames frames;
+    public ModalDialogs modalDialogs;
+    public BookStore bookStore;
+    public LogIn logIn;
+    public Profile profile;
+    public BrokenLinksAndImages brokenLinksAndImages;
+    public Buttons buttons;
+    public CheckBox checkBox;
+    public DynamicProperties dynamicProperties;
+    public Links links;
+    public RadioButton radioButton;
+    public TextBox textBox;
+    public UploadDownload uploadDownload;
+    public WebTables webTables;
+    public PracticeForm practiceForm;
+    public Draggable draggable;
+    public Droppable droppable;
+    public Resizable resizable;
+    public Selectable selectable;
+    public Sortable sortable;
+    public Accordion accordion;
+    public AutoComplete autoComplete;
+    public DatePicker datePicker;
+    public Menu menu;
+    public ProgressBar progressBar;
+    public SelectMenu selectMenu;
+    public Slider slider;
+    public Tabs tabsT;
+    public ToolTips toolTips;
+
+    @BeforeClass
+    public void beforeClass() {
+        wdm = new ChromeDriverManager();
+        wdm.setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addExtensions(new File("src/main/resources/addblockplus.crx"));
+        driver = new ChromeDriver(options);
+        wdwait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        wdwait.until(ExpectedConditions.visibilityOf(driver.findElement(By.tagName("h1"))));
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
+        actions = new Actions(driver);
+        driver.manage().window().maximize();
+        homePage = new HomePage(driver, wdwait);
+        alerts = new Alerts(driver, wdwait);
+        browserWindows = new BrowserWindows(driver);
+        frames = new Frames(driver);
+        modalDialogs = new ModalDialogs(driver);
+        bookStore = new BookStore(driver, wdwait);
+        logIn = new LogIn(driver, wdwait);
+        profile = new Profile(driver, wdwait);
+        brokenLinksAndImages = new BrokenLinksAndImages(driver);
+        buttons = new Buttons(driver);
+        checkBox = new CheckBox(driver);
+        dynamicProperties = new DynamicProperties(driver, wdwait);
+        links = new Links(driver);
+        radioButton = new RadioButton(driver);
+        textBox = new TextBox(driver);
+        uploadDownload = new UploadDownload(driver);
+        webTables = new WebTables(driver);
+        practiceForm = new PracticeForm(driver, wdwait);
+        draggable = new Draggable(driver);
+        droppable = new Droppable(driver);
+        resizable = new Resizable(driver);
+        selectable = new Selectable(driver);
+        sortable = new Sortable(driver);
+        accordion = new Accordion(driver);
+        autoComplete = new AutoComplete(driver);
+        datePicker = new DatePicker(driver);
+        menu = new Menu(driver);
+        progressBar = new ProgressBar(driver, wdwait);
+        selectMenu = new SelectMenu(driver);
+        slider = new Slider(driver);
+        tabsT = new Tabs(driver);
+        toolTips = new ToolTips(driver, wdwait);
+    }
+
+    @AfterClass
+    public void afterClass(){
+        homePage = null;
+        alerts = null;
+        browserWindows = null;
+        frames = null;
+        modalDialogs = null;
+        bookStore = null;
+        logIn = null;
+        profile = null;
+        brokenLinksAndImages = null;
+        buttons = null;
+        checkBox = null;
+        dynamicProperties = null;
+        links = null;
+        radioButton = null;
+        textBox = null;
+        uploadDownload = null;
+        webTables = null;
+        practiceForm = null;
+        draggable = null;
+        droppable = null;
+        resizable = null;
+        selectable = null;
+        sortable = null;
+        accordion = null;
+        autoComplete = null;
+        datePicker = null;
+        menu = null;
+        progressBar = null;
+        selectMenu = null;
+        slider = null;
+        tabsT = null;
+        toolTips = null;
+        wdwait = null;
+        driver.quit();
+        driver = null;
+        wdm = null;
+    }
+}
