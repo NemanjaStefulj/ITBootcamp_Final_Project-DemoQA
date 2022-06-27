@@ -1,4 +1,4 @@
-package Tests.InteractionsTests;
+/*package Tests.InteractionsTests;
 
 import BasePage.BasePage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,4 +13,9 @@ public class SelectableTest extends BasePage {
         driver.navigate().to(selectable.url);
     }
 
-}
+
+    @Test
+    public void selectableTest() {
+
+    }
+}*/
